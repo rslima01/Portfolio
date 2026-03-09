@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Romildo Lima | Consultor de TI & Especialista em Produto</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#0f172a',
+                        secondary: '#1e293b',
+                        accent: '#3b82f6',
+                        'accent-hover': '#2563eb',
+                        success: '#10b981',
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.8s ease-out',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-effect {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .service-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px -15px rgba(59, 130, 246, 0.3);
+        }
+        .timeline-line {
+            background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
+        }
+        .skill-tag {
+            transition: all 0.3s ease;
+        }
+        .skill-tag:hover {
+            transform: scale(1.05);
+            background: rgba(59, 130, 246, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-primary text-gray-100 font-sans antialiased overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-effect transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center text-white font-bold text-xl">
+                        RL
+                    </div>
+                    <span class="text-xl font-bold tracking-tight">Romildo Lima</span>
+                </div>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="#inicio" class="hover:text-accent transition-colors">Início</a>
+                    <a href="#servicos" class="hover:text-accent transition-colors">Serviços</a>
+                    <a href="#experiencia" class="hover:text-accent transition-colors">Experiência</a>
+                    <a href="#cases" class="hover:text-accent transition-colors">Cases</a>
+                    <a href="#contato" class="px-6 py-2 bg-accent hover:bg-accent-hover rounded-full transition-all transform hover:scale-105">Falar com Especialista</a>
+                </div>
+
+                <button class="md:hidden text-2xl" onclick="toggleMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden glass-effect border-t border-gray-700">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="#inicio" class="block py-3 hover:text-accent">Início</a>
+                <a href="#servicos" class="block py-3 hover:text-accent">Serviços</a>
+                <a href="#experiencia" class="block py-3 hover:text-accent">Experiência</a>
+                <a href="#cases" class="block py-3 hover:text-accent">Cases</a>
+                <a href="#contato" class="block py-3 text-accent font-semibold">Falar com Especialista</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="relative min-h-screen flex items-center pt-20 overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute -top-40 -right-40 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-float"></div>
+            <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-float" style="animation-delay: 2s;"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="animate-slide-up">
+                    <div class="inline-flex items-center px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium mb-6">
+                        <span class="w-2 h-2 bg-blue-400 rounded-full mr-2 animate-pulse"></span>
+                        Disponível para Projetos PJ
+                    </div>
+                    
+                    <h1 class="text-5xl md:text-7xl font-bold leading-tight mb-6">
+                        Transformando <span class="gradient-text">complexidade</span> em resultados
+                    </h1>
+                    
+                    <p class="text-xl text-gray-400 mb-8 leading-relaxed">
+                        Especialista em <strong>Projetos de TI, Requisitos, QA e Sucesso do Cliente</strong> com 12+ anos de experiência transformando necessidades de negócio em soluções técnicas eficientes.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4 mb-12">
+                        <a href="#contato" class="px-8 py-4 bg-accent hover:bg-accent-hover rounded-full font-semibold transition-all transform hover:scale-105 flex items-center gap-2">
+                            <i class="fas fa-rocket"></i>
+                            Iniciar Projeto
+                        </a>
+                        <a href="#servicos" class="px-8 py-4 border border-gray-600 hover:border-accent rounded-full font-semibold transition-all hover:bg-white/5">
+                            Ver Serviços
+                        </a>
+                    </div>
+
+                    <div class="flex items-center gap-8 text-sm text-gray-400">
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check-circle text-success"></i>
+                            <span>12+ Anos de XP</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check-circle text-success"></i>
+                            <span>50+ Projetos Entregues</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check-circle text-success"></i>
+                            <span>100% Remoto</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative animate-fade-in">
+                    <div class="relative w-full aspect-square max-w-md mx-auto">
+                        <div class="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 rounded-3xl rotate-6 opacity-20"></div>
+                        <div class="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 rounded-3xl -rotate-6 opacity-20"></div>
+                        <img src="/mnt/kimi/upload/profile.png" alt="Romildo Lima" class="relative w-full h-full object-cover rounded-3xl shadow-2xl border border-white/10">
+                        
+                        <!-- Floating Cards -->
+                        <div class="absolute -bottom-6 -left-6 glass-effect p-4 rounded-2xl shadow-xl animate-float">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 bg-success/20 rounded-full flex items-center justify-center text-success">
+                                    <i class="fas fa-project-diagram text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-400">Projetos Ativos</p>
+                                    <p class="text-lg font-bold">Gestão de Escopo</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="absolute -top-6 -right-6 glass-effect p-4 rounded-2xl shadow-xl animate-float" style="animation-delay: 1s;">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center text-purple-400">
+                                    <i class="fas fa-users text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-400">Clientes Satisfeitos</p>
+                                    <p class="text-lg font-bold">Retenção 95%</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicos" class="py-24 bg-secondary/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Áreas de Atuação</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    Ofereço soluções end-to-end em tecnologia, desde o levantamento de requisitos até o sucesso pós-implantação do cliente.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="service-card glass-effect p-8 rounded-2xl border border-gray-700/50">
+                    <div class="w-14 h-14 bg-blue-500/20 rounded-xl flex items-center justify-center text-blue-400 text-2xl mb-6">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Análise de Projetos</h3>
+                    <p class="text-gray-400 mb-6 text-sm leading-relaxed">
+                        Gestão completa de escopo, levantamento de requisitos, documentação funcional e mediação entre stakeholders técnicos e de negócio.
+                    </p>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-success text-xs"></i> Gestão de Escopo</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-success text-xs"></i> Documentação Técnica</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-success text-xs"></i> User Stories & Critérios de Aceite</li>
+                    </ul>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="service-card glass-effect p-8 rounded-2xl border border-gray-700/50">
+                    <div class="w-14 h-14 bg-purple-500/20 rounded-xl flex items-center justify-center text-purple-400 text-2xl mb-6">
+                        <i class="fas fa-clipboard-check"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Análise de Requisitos</h3>
+                    <p class="text-gray-400 mb-6 text-sm leading-relaxed">
+                        Especificação funcional detalhada, modelagem de fluxos, regras de negócio e tradução de necessidades do cliente para demandas técnicas.
+                    </p>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-success text-xs"></i> Especificação Funcional</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-success text-xs"></i> Modelagem de Processos</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-success text-xs"></i> Validação com Stakeholders</li>
+                    </ul>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="service-card glass-effect p-8 rounded-2xl border border-gray-700/50">
+                    <div class="w-14 h-14 bg-green-500/20 rounded-xl flex items-center justify-center text-green-400 text-2xl mb-6">
+                        <i class="fas fa-bug"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Quality Assurance</h3>
+                    <p class="text-gray-400 mb-6 text-sm leading-relaxed">
+                        Testes manuais e exploratórios, validação funcional, testes de usabilidade e garantia de qualidade em ambientes ágeis.
+                    </p>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-success text-xs"></i> Testes Exploratórios</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-success text-xs"></i> Testes de Usabilidade (UX)</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-success text-xs"></i> BDD & Gherkin</li>
+                    </ul>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="service-card glass-effect p-8 rounded-2xl border border-gray-700/50">
+                    <div class="w-14 h-14 bg-orange-500/20 rounded-xl flex items-center justify-center text-orange-400 text-2xl mb-6">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Customer Success</h3>
+                    <p class="text-gray-400 mb-6 text-sm leading-relaxed">
+                        Onboarding estratégico, treinamentos, gestão de relacionamento, retenção de clientes e aumento de engajamento com a plataforma.
+                    </p>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-success text-xs"></i> Onboarding & Treinamentos</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-success text-xs"></i> Gestão de Retenção (Churn)</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-success text-xs"></i> Análise de Jornada do Cliente</li>
+                    </ul>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="service-card glass-effect p-8 rounded-2xl border border-gray-700/50">
+                    <div class="w-14 h-14 bg-red-500/20 rounded-xl flex items-center justify-center text-red-400 text-2xl mb-6">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Implantação de Sistemas</h3>
+                    <p class="text-gray-400 mb-6 text-sm leading-relaxed">
+                        Parametrização, homologações, go-live e acompanhamento pós-implantação garantindo aderência total às regras de negócio.
+                    </p>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-success text-xs"></i> Parametrização de Sistemas</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-success text-xs"></i> Homologação Funcional</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-success text-xs"></i> Treinamentos (Online/Presencial)</li>
+                    </ul>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="service-card glass-effect p-8 rounded-2xl border border-gray-700/50 bg-gradient-to-br from-blue-600/20 to-purple-600/20 border-blue-500/30">
+                    <div class="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center text-white text-2xl mb-6">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Consultoria Especializada</h3>
+                    <p class="text-gray-400 mb-6 text-sm leading-relaxed">
+                        Análise ponta a ponta de processos, otimização de fluxos e mentoria em melhores práticas de gestão de produto e projetos.
+                    </p>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-success text-xs"></i> Análise de Processos</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-success text-xs"></i> Otimização de Fluxos</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-success text-xs"></i> Mentoria Técnica</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Timeline -->
+    <section id="experiencia" class="py-24 relative">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Trajetória Profissional</h2>
+                <p class="text-gray-400">12+ anos de experiência sólida em tecnologia</p>
+            </div>
+
+            <div class="relative">
+                <!-- Timeline Line -->
+                <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 timeline-line rounded-full hidden md:block"></div>
+
+                <!-- Item 1 -->
+                <div class="relative mb-12 md:mb-0">
+                    <div class="md:flex items-center justify-between">
+                        <div class="md:w-5/12 md:text-right mb-4 md:mb-0">
+                            <div class="glass-effect p-6 rounded-2xl border border-gray-700/50 hover:border-blue-500/50 transition-colors">
+                                <span class="text-accent font-semibold text-sm">Nov 2023 - Atual</span>
+                                <h3 class="text-xl font-bold mt-1">Analista de Projetos & CS</h3>
+                                <p class="text-gray-400 text-sm mt-2">Itarget Tecnologia</p>
+                                <p class="text-gray-500 text-xs mt-2">Levantamento de requisitos, documentação funcional, homologações e sucesso do cliente em sistemas de inscrições e eventos.</p>
+                            </div>
+                        </div>
+                        <div class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-blue-500 rounded-full border-4 border-primary hidden md:block z-10"></div>
+                        <div class="md:w-5/12"></div>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="relative mb-12 md:mb-0 md:mt-12">
+                    <div class="md:flex items-center justify-between">
+                        <div class="md:w-5/12"></div>
+                        <div class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-purple-500 rounded-full border-4 border-primary hidden md:block z-10"></div>
+                        <div class="md:w-5/12 md:text-left mb-4 md:mb-0">
+                            <div class="glass-effect p-6 rounded-2xl border border-gray-700/50 hover:border-purple-500/50 transition-colors">
+                                <span class="text-purple-400 font-semibold text-sm">Ago 2016 - Ago 2023</span>
+                                <h3 class="text-xl font-bold mt-1">Analista de Projetos & Implantação</h3>
+                                <p class="text-gray-400 text-sm mt-2">Geosales Tecnologia</p>
+                                <p class="text-gray-500 text-xs mt-2">Gestão de escopo, testes (TestLink/Redmine), homologações, treinamentos e relacionamento estratégico com clientes.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="relative md:mt-12">
+                    <div class="md:flex items-center justify-between">
+                        <div class="md:w-5/12 md:text-right mb-4 md:mb-0">
+                            <div class="glass-effect p-6 rounded-2xl border border-gray-700/50 hover:border-green-500/50 transition-colors">
+                                <span class="text-green-400 font-semibold text-sm">Jun 2012 - Jan 2016</span>
+                                <h3 class="text-xl font-bold mt-1">Analista de Projetos & QA</h3>
+                                <p class="text-gray-400 text-sm mt-2">Itarget Tecnologia</p>
+                                <p class="text-gray-500 text-xs mt-2">Testes funcionais e exploratórios, documentação, levantamento de requisitos e consultoria técnica.</p>
+                            </div>
+                        </div>
+                        <div class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-green-500 rounded-full border-4 border-primary hidden md:block z-10"></div>
+                        <div class="md:w-5/12"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Cloud -->
+    <section class="py-24 bg-secondary/30">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">Competências Técnicas</h2>
+                <p class="text-gray-400">Stack completo para entrega de valor</p>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-3">
+                <span class="skill-tag px-4 py-2 rounded-full bg-white/5 border border-gray-700 text-sm cursor-default">Levantamento de Requisitos</span>
+                <span class="skill-tag px-4 py-2 rounded-full bg-white/5 border border-gray-700 text-sm cursor-default">User Stories</span>
+                <span class="skill-tag px-4 py-2 rounded-full bg-white/5 border border-gray-700 text-sm cursor-default">Critérios de Aceite</span>
+                <span class="skill-tag px-4 py-2 rounded-full bg-white/5 border border-gray-700 text-sm cursor-default">Documentação Funcional</span>
+                <span class="skill-tag px-4 py-2 rounded-full bg-white/5 border border-gray-700 text-sm cursor-default">Testes Exploratórios</span>
+                <span class="skill-tag px-4 py-2 rounded-full bg-white/5 border border-gray-700 text-sm cursor-default">BDD (Gherkin)</span>
+                <span class="skill-tag px-4 py-2 rounded-full bg-white/5 border border-gray-700 text-sm cursor-default">TestLink</span>
+                <span class="skill-tag px-4 py-2 rounded-full bg-white/5 border border-gray-700 text-sm cursor-default">Redmine</span>
+                <span class="skill-tag px-4 py-2 rounded-full bg-white/5 border border-gray-700 text-sm cursor-default">Git</span>
+                <span class="skill-tag px-4 py-2 rounded-full bg-white/5 border border-gray-700 text-sm cursor-default">UX & Usabilidade</span>
+                <span class="skill-tag px-4 py-2 rounded-full bg-white/5 border border-gray-700 text-sm cursor-default">Customer Success</span>
+                <span class="skill-tag px-4 py-2 rounded-full bg-white/5 border border-gray-700 text-sm cursor-default">Onboarding</span>
+                <span class="skill-tag px-4 py-2 rounded-full bg-white/5 border border-gray-700 text-sm cursor-default">Treinamentos</span>
+                <span class="skill-tag px-4 py-2 rounded-full bg-white/5 border border-gray-700 text-sm cursor-default">Homologação</span>
+                <span class="skill-tag px-4 py-2 rounded-full bg-white/5 border border-gray-700 text-sm cursor-default">Parametrização</span>
+                <span class="skill-tag px-4 py-2 rounded-full bg-white/5 border border-gray-700 text-sm cursor-default">Gestão de Escopo</span>
+                <span class="skill-tag px-4 py-2 rounded-full bg-white/5 border border-gray-700 text-sm cursor-default">Análise Funcional</span>
+                <span class="skill-tag px-4 py-2 rounded-full bg-white/5 border border-gray-700 text-sm cursor-default">Métodos Ágeis</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cases Section -->
+    <section id="cases" class="py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Cases de Sucesso</h2>
+                <p class="text-gray-400">Resultados reais entregues aos clientes</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Case 1 -->
+                <div class="group relative overflow-hidden rounded-2xl glass-effect border border-gray-700/50 hover:border-blue-500/50 transition-all duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="p-8 relative">
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center text-blue-400">
+                                <i class="fas fa-university text-xl"></i>
+                            </div>
+                            <span class="text-xs text-gray-500 bg-gray-800 px-3 py-1 rounded-full">Educação</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3">Plataforma de Inscrições & Eventos</h3>
+                        <p class="text-gray-400 mb-6 text-sm leading-relaxed">
+                            Atuação completa em plataforma de gestão educacional: desde o levantamento de requisitos complexos de inscrições, análise de fluxos de pagamento, até homologações e treinamentos de usuários finais.
+                        </p>
+                        <div class="grid grid-cols-3 gap-4 mb-6">
+                            <div class="text-center">
+                                <p class="text-2xl font-bold text-blue-400">100%</p>
+                                <p class="text-xs text-gray-500">Adesão</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-2xl font-bold text-blue-400">-40%</p>
+                                <p class="text-xs text-gray-500">Churn</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-2xl font-bold text-blue-400">50+</p>
+                                <p class="text-xs text-gray-500">Treinamentos</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-xs px-2 py-1 bg-blue-500/10 text-blue-400 rounded">Requisitos</span>
+                            <span class="text-xs px-2 py-1 bg-blue-500/10 text-blue-400 rounded">QA</span>
+                            <span class="text-xs px-2 py-1 bg-blue-500/10 text-blue-400 rounded">CS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Case 2 -->
+                <div class="group relative overflow-hidden rounded-2xl glass-effect border border-gray-700/50 hover:border-purple-500/50 transition-all duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-br from-purple-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="p-8 relative">
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center text-purple-400">
+                                <i class="fas fa-chart-line text-xl"></i>
+                            </div>
+                            <span class="text-xs text-gray-500 bg-gray-800 px-3 py-1 rounded-full">Vendas</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3">Sistema de Força de Vendas</h3>
+                        <p class="text-gray-400 mb-6 text-sm leading-relaxed">
+                            Implementação de sistema mobile e web para gestão comercial: mapeamento de regras de negócio, testes ponta a ponta, parametrização de rotas e acompanhamento pós-implantação com equipes de campo.
+                        </p>
+                        <div class="grid grid-cols-3 gap-4 mb-6">
+                            <div class="text-center">
+                                <p class="text-2xl font-bold text-purple-400">7</p>
+                                <p class="text-xs text-gray-500">Anos</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-2xl font-bold text-purple-400">30%</p>
+                                <p class="text-xs text-gray-500">Eficiência</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-2xl font-bold text-purple-400">0</p>
+                                <p class="text-xs text-gray-500">Rollback</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-xs px-2 py-1 bg-purple-500/10 text-purple-400 rounded">Projetos</span>
+                            <span class="text-xs px-2 py-1 bg-purple-500/10 text-purple-400 rounded">Testes</span>
+                            <span class="text-xs px-2 py-1 bg-purple-500/10 text-purple-400 rounded">Implantação</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Case 3 -->
+                <div class="group relative overflow-hidden rounded-2xl glass-effect border border-gray-700/50 hover:border-green-500/50 transition-all duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-br from-green-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="p-8 relative">
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center text-green-400">
+                                <i class="fas fa-mobile-alt text-xl"></i>
+                            </div>
+                            <span class="text-xs text-gray-500 bg-gray-800 px-3 py-1 rounded-full">Mobile</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3">Aplicativos Corporativos</h3>
+                        <p class="text-gray-400 mb-6 text-sm leading-relaxed">
+                            Validação de apps iOS e Android: testes exploratórios identificando falhas críticas de usabilidade, documentação de cenários edge cases e homologação junto a usuários finais antes do lançamento.
+                        </p>
+                        <div class="grid grid-cols-3 gap-4 mb-6">
+                            <div class="text-center">
+                                <p class="text-2xl font-bold text-green-400">15+</p>
+                                <p class="text-xs text-gray-500">Apps</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-2xl font-bold text-green-400">99%</p>
+                                <p class="text-xs text-gray-500">Aprovação</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-2xl font-bold text-green-400">-60%</p>
+                                <p class="text-xs text-gray-500">Bugs Pós-Deploy</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-xs px-2 py-1 bg-green-500/10 text-green-400 rounded">Mobile QA</span>
+                            <span class="text-xs px-2 py-1 bg-green-500/10 text-green-400 rounded">UX</span>
+                            <span class="text-xs px-2 py-1 bg-green-500/10 text-green-400 rounded">Homologação</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Case 4 -->
+                <div class="group relative overflow-hidden rounded-2xl glass-effect border border-gray-700/50 hover:border-orange-500/50 transition-all duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-br from-orange-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="p-8 relative">
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="w-12 h-12 bg-orange-500/20 rounded-lg flex items-center justify-center text-orange-400">
+                                <i class="fas fa-users-cog text-xl"></i>
+                            </div>
+                            <span class="text-xs text-gray-500 bg-gray-800 px-3 py-1 rounded-full">Consultoria</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3">Transformação Digital de Processos</h3>
+                        <p class="text-gray-400 mb-6 text-sm leading-relaxed">
+                            Consultoria para otimização de fluxos operacionais: análise de processos legados, proposta de novos fluxos digitais, treinamento de equipes e acompanhamento da adoção das novas ferramentas.
+                        </p>
+                        <div class="grid grid-cols-3 gap-4 mb-6">
+                            <div class="text-center">
+                                <p class="text-2xl font-bold text-orange-400">20+</p>
+                                <p class="text-xs text-gray-500">Processos</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-2xl font-bold text-orange-400">5x</p>
+                                <p class="text-xs text-gray-500">Velocidade</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-2xl font-bold text-orange-400">100%</p>
+                                <p class="text-xs text-gray-500">Satisfação</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-xs px-2 py-1 bg-orange-500/10 text-orange-400 rounded">Mapeamento</span>
+                            <span class="text-xs px-2 py-1 bg-orange-500/10 text-orange-400 rounded">Treinamento</span>
+                            <span class="text-xs px-2 py-1 bg-orange-500/10 text-orange-400 rounded">Adoção</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Differentials -->
+    <section class="py-24 bg-secondary/30">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-4xl font-bold mb-6">Por que trabalhar comigo?</h2>
+                    <p class="text-gray-400 mb-8">
+                        Experiência comprovada em múltiplas vertentes de TI, oferecendo uma visão 360° dos projetos desde a concepção até o sucesso do cliente.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 flex-shrink-0">
+                                <i class="fas fa-bullseye"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-1">Visão Ponta a Ponta</h4>
+                                <p class="text-gray-400 text-sm">Experiência em todas as fases: requisitos, desenvolvimento, testes, implantação e sucesso do cliente.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400 flex-shrink-0">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-1">Ponte Efetiva</h4>
+                                <p class="text-gray-400 text-sm">Capacidade única de traduzir necessidades complexas do negócio em demandas técnicas claras.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center text-green-400 flex-shrink-0">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-1">Foco em Qualidade</h4>
+                                <p class="text-gray-400 text-sm">Mentalidade de QA aplicada em todas as etapas, prevenindo retrabalho e garantindo entregas sólidas.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-full bg-orange-500/20 flex items-center justify-center text-orange-400 flex-shrink-0">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-1">Didática e Empatia</h4>
+                                <p class="text-gray-400 text-sm">Experiência em capacitação de usuários com clareza, reduzindo a curva de aprendizado e aumentando adoção.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <div class="glass-effect p-8 rounded-3xl border border-gray-700/50">
+                        <h3 class="text-2xl font-bold mb-6 text-center">Formação Acadêmica</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-4 p-4 bg-white/5 rounded-xl">
+                                <div class="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center text-blue-400">
+                                    <i class="fas fa-university"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Análise e Desenvolvimento de Sistemas</h4>
+                                    <p class="text-sm text-gray-400">Universidade Estácio de Sá</p>
+                                    <span class="text-xs text-accent">Em andamento</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 class="text-2xl font-bold mt-8 mb-6 text-center">Certificações & Cursos</h3>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="flex items-center gap-2 text-sm text-gray-300">
+                                <i class="fas fa-certificate text-accent text-xs"></i>
+                                <span>Fundamentos de UX</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-sm text-gray-300">
+                                <i class="fas fa-certificate text-accent text-xs"></i>
+                                <span>Teste de Usabilidade</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-sm text-gray-300">
+                                <i class="fas fa-certificate text-accent text-xs"></i>
+                                <span>Quality Assurance</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-sm text-gray-300">
+                                <i class="fas fa-certificate text-accent text-xs"></i>
+                                <span>BDD (Gherkin)</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-sm text-gray-300">
+                                <i class="fas fa-certificate text-accent text-xs"></i>
+                                <span>User Stories</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-sm text-gray-300">
+                                <i class="fas fa-certificate text-accent text-xs"></i>
+                                <span>Atendimento Consultivo</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contato" class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-blue-600/10 to-purple-600/10"></div>
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="glass-effect rounded-3xl p-8 md:p-12 border border-gray-700/50 text-center">
+                <h2 class="text-4xl font-bold mb-4">Vamos trabalhar juntos?</h2>
+                <p class="text-gray-400 mb-8 max-w-2xl mx-auto">
+                    Disponível para projetos como PJ (MEI). Entre em contato para discutirmos como posso contribuir com seu time ou produto.
+                </p>
+
+                <div class="grid md:grid-cols-3 gap-6 mb-12">
+                    <a href="https://wa.me/5585985968779" target="_blank" class="group p-6 rounded-2xl bg-white/5 hover:bg-green-500/20 border border-gray-700 hover:border-green-500/50 transition-all">
+                        <i class="fab fa-whatsapp text-3xl text-green-400 mb-3 group-hover:scale-110 transition-transform block"></i>
+                        <h4 class="font-bold">WhatsApp</h4>
+                        <p class="text-sm text-gray-400">(85) 98596-8779</p>
+                    </a>
+
+                    <a href="mailto:rslima01@gmail.com" class="group p-6 rounded-2xl bg-white/5 hover:bg-blue-500/20 border border-gray-700 hover:border-blue-500/50 transition-all">
+                        <i class="fas fa-envelope text-3xl text-blue-400 mb-3 group-hover:scale-110 transition-transform block"></i>
+                        <h4 class="font-bold">E-mail</h4>
+                        <p class="text-sm text-gray-400">rslima01@gmail.com</p>
+                    </a>
+
+                    <a href="#" class="group p-6 rounded-2xl bg-white/5 hover:bg-purple-500/20 border border-gray-700 hover:border-purple-500/50 transition-all">
+                        <i class="fab fa-linkedin text-3xl text-purple-400 mb-3 group-hover:scale-110 transition-transform block"></i>
+                        <h4 class="font-bold">LinkedIn</h4>
+                        <p class="text-sm text-gray-400">Romildo Lima</p>
+                    </a>
+                </div>
+
+                <div class="inline-flex items-center gap-4 px-6 py-3 rounded-full bg-white/5 border border-gray-700">
+                    <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                    <span class="text-sm">Disponível para novos projetos em Março/2026</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center text-white font-bold text-sm">
+                    RL
+                </div>
+                <span class="font-semibold">Romildo Lima</span>
+            </div>
+            
+            <p class="text-gray-500 text-sm">
+                © 2026 Todos os direitos reservados. Fortaleza - CE
+            </p>
+
+            <div class="flex gap-4">
+                <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-all">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-all">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="mailto:rslima01@gmail.com" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-all">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                }
+            });
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-lg', 'bg-primary/95');
+            } else {
+                navbar.classList.remove('shadow-lg', 'bg-primary/95');
+            }
+        });
+
+        // Intersection Observer for Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements
+        document.querySelectorAll('.service-card, .glass-effect').forEach((el) => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
