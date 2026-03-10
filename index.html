@@ -7,6 +7,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -20,11 +22,13 @@
                         accent: '#3b82f6',
                         'accent-hover': '#2563eb',
                         success: '#10b981',
+                        warning: '#f59e0b',
                     },
                     animation: {
                         'fade-in': 'fadeIn 0.8s ease-out',
                         'slide-up': 'slideUp 0.8s ease-out',
                         'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                     },
                     keyframes: {
                         fadeIn: {
@@ -72,6 +76,60 @@
             transform: scale(1.05);
             background: rgba(59, 130, 246, 0.2);
         }
+        .portfolio-item {
+            transition: all 0.3s ease;
+        }
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.3);
+        }
+        .modal-backdrop {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+        .doc-preview {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+        .clickable-item {
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .clickable-item:hover {
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 6px;
+            padding-left: 8px;
+            margin-left: -8px;
+        }
+        .clickable-item::after {
+            content: '\f06e';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 400;
+            margin-left: 8px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            color: #3b82f6;
+        }
+        .clickable-item:hover::after {
+            opacity: 1;
+        }
+        .badge-preview {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            background: rgba(59, 130, 246, 0.2);
+            color: #3b82f6;
+            border-radius: 12px;
+            margin-left: 8px;
+            font-weight: 600;
+        }
+        .profile-img {
+            object-fit: cover;
+            border: 2px solid rgba(59, 130, 246, 0.3);
+        }
     </style>
 </head>
 <body class="bg-primary text-gray-100 font-sans antialiased overflow-x-hidden">
@@ -80,9 +138,9 @@
     <nav class="fixed w-full z-50 glass-effect transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
-                <div class="flex items-center space-x-2">
-                    <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center text-white font-bold text-xl">
-                        RL
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-full overflow-hidden bg-gradient-to-br from-blue-500 to-purple-600 p-0.5">
+                        <img src="/mnt/kimi/upload/profile.png" alt="Romildo Lima" class="w-full h-full object-cover rounded-full profile-img bg-primary">
                     </div>
                     <span class="text-xl font-bold tracking-tight">Romildo Lima</span>
                 </div>
@@ -92,6 +150,7 @@
                     <a href="#servicos" class="hover:text-accent transition-colors">Serviços</a>
                     <a href="#experiencia" class="hover:text-accent transition-colors">Experiência</a>
                     <a href="#cases" class="hover:text-accent transition-colors">Cases</a>
+                    <a href="#portfolio" class="hover:text-accent transition-colors">Portfolio</a>
                     <a href="#contato" class="px-6 py-2 bg-accent hover:bg-accent-hover rounded-full transition-all transform hover:scale-105">Falar com Especialista</a>
                 </div>
 
@@ -108,6 +167,7 @@
                 <a href="#servicos" class="block py-3 hover:text-accent">Serviços</a>
                 <a href="#experiencia" class="block py-3 hover:text-accent">Experiência</a>
                 <a href="#cases" class="block py-3 hover:text-accent">Cases</a>
+                <a href="#portfolio" class="block py-3 hover:text-accent">Portfolio</a>
                 <a href="#contato" class="block py-3 text-accent font-semibold">Falar com Especialista</a>
             </div>
         </div>
@@ -142,8 +202,8 @@
                             <i class="fas fa-rocket"></i>
                             Iniciar Projeto
                         </a>
-                        <a href="#servicos" class="px-8 py-4 border border-gray-600 hover:border-accent rounded-full font-semibold transition-all hover:bg-white/5">
-                            Ver Serviços
+                        <a href="#portfolio" class="px-8 py-4 border border-gray-600 hover:border-accent rounded-full font-semibold transition-all hover:bg-white/5">
+                            Ver Portfolio
                         </a>
                     </div>
 
@@ -207,6 +267,9 @@
                 <p class="text-gray-400 max-w-2xl mx-auto">
                     Ofereço soluções end-to-end em tecnologia, desde o levantamento de requisitos até o sucesso pós-implantação do cliente.
                 </p>
+                <p class="text-sm text-gray-500 mt-2">
+                    <i class="fas fa-eye text-accent mr-1"></i> Itens com ícone de olho possuem exemplos no Portfolio
+                </p>
             </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -254,7 +317,10 @@
                     <ul class="space-y-2 text-sm text-gray-300">
                         <li class="flex items-center gap-2"><i class="fas fa-check text-success text-xs"></i> Testes Exploratórios</li>
                         <li class="flex items-center gap-2"><i class="fas fa-check text-success text-xs"></i> Testes de Usabilidade (UX)</li>
-                        <li class="flex items-center gap-2"><i class="fas fa-check text-success text-xs"></i> BDD & Gherkin</li>
+                        <li class="clickable-item flex items-center gap-2 text-accent" onclick="openModal('bdd')">
+                            <i class="fas fa-check text-success text-xs"></i> BDD & Gherkin
+                            <span class="badge-preview"><i class="fas fa-eye text-xs"></i> Ver</span>
+                        </li>
                     </ul>
                 </div>
 
@@ -300,9 +366,12 @@
                         Criação de manuais, guias de uso e documentação funcional para apoiar usuários, equipes técnicas e processos de implantação.
                      </p>
                     <ul class="space-y-2 text-sm text-gray-300">
-                    <li class="flex items-center gap-2"><i class="fas fa-check text-success text-xs"></i> Manuais de Usuário</li>
-                    <li class="flex items-center gap-2"><i class="fas fa-check text-success text-xs"></i> Documentação Funcional</li>
-                    <li class="flex items-center gap-2"><i class="fas fa-check text-success text-xs"></i> Guias de Apoio e Treinamento</li>
+                        <li class="clickable-item flex items-center gap-2 text-accent" onclick="openModal('manual')">
+                            <i class="fas fa-check text-success text-xs"></i> Manuais de Usuário
+                            <span class="badge-preview"><i class="fas fa-eye text-xs"></i> Ver</span>
+                        </li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-success text-xs"></i> Documentação Funcional</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-success text-xs"></i> Guias de Apoio e Treinamento</li>
                     </ul>
                 </div>
             </div>
@@ -559,8 +628,91 @@
         </div>
     </section>
 
+    <!-- Portfolio Section (NOVA SEÇÃO) -->
+    <section id="portfolio" class="py-24 bg-secondary/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Portfolio de Entregáveis</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    Exemplos reais de documentação e especificações técnicas desenvolvidas em projetos. Clique para visualizar os detalhes.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Portfolio Item 1: Manual de Usuário -->
+                <div class="portfolio-item glass-effect rounded-2xl overflow-hidden border border-gray-700/50 cursor-pointer group" onclick="openModal('manual')">
+                    <div class="h-48 bg-gradient-to-br from-blue-600/30 to-purple-600/30 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMzYjgyZjYiIGZpbGwtb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMzYgMzRoLTJ2LTRoMnY0em0wLTZ2LTRoLTJ2NGgyem0tNiA2aC00djJoNHYtMnptMC02di00aC00djRoNHptLTYgNmgtNHYyaDR2LTJ6bTAtNnYtNGgtNHY0aDR6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-30"></div>
+                        <i class="fas fa-book-open text-6xl text-blue-400/50 group-hover:scale-110 transition-transform duration-500"></i>
+                        <div class="absolute top-4 right-4 bg-blue-500/20 backdrop-blur-sm px-3 py-1 rounded-full text-xs text-blue-300 border border-blue-500/30">
+                            Documentação
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-xl font-bold">Manual do Usuário - Campanha SBD</h3>
+                            <span class="text-xs text-gray-500 bg-gray-800 px-2 py-1 rounded">PDF</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-4">
+                            Manual completo de aplicação mobile para campanha médica. Inclui instruções de acesso, fluxos de atendimento, sincronização de dados e FAQ.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex gap-2">
+                                <span class="text-xs px-2 py-1 bg-blue-500/10 text-blue-400 rounded">Mobile</span>
+                                <span class="text-xs px-2 py-1 bg-blue-500/10 text-blue-400 rounded">UX Writing</span>
+                            </div>
+                            <span class="text-accent text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">
+                                Ver documento <i class="fas fa-arrow-right"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 2: BDD -->
+                <div class="portfolio-item glass-effect rounded-2xl overflow-hidden border border-gray-700/50 cursor-pointer group" onclick="openModal('bdd')">
+                    <div class="h-48 bg-gradient-to-br from-green-600/30 to-teal-600/30 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMxMGY5ODEiIGZpbGwtb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMzAgMzBoMnYyaC0ydi0yem0tNCAwaDJ2MmgtMnYtMnptOCAwaDJ2MmgtMnYtMnptLTQtNHYyaDJ2LTJoLTJ6bS00IDBoMnYyaC0ydi0yem04IDBoMnYyaC0ydi0yem0tNCA0djJoMnYtMmgtMnoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-30"></div>
+                        <i class="fas fa-code text-6xl text-green-400/50 group-hover:scale-110 transition-transform duration-500"></i>
+                        <div class="absolute top-4 right-4 bg-green-500/20 backdrop-blur-sm px-3 py-1 rounded-full text-xs text-green-300 border border-green-500/30">
+                            Especificação
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-xl font-bold">User Stories & BDD - Portal V5</h3>
+                            <span class="text-xs text-gray-500 bg-gray-800 px-2 py-1 rounded">BDD</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-4">
+                            Especificação funcional com BDD (Behavior-Driven Development) para funcionalidade de mudança de categoria. Inclui cenários Gherkin, critérios de aceitação e regras de negócio.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex gap-2">
+                                <span class="text-xs px-2 py-1 bg-green-500/10 text-green-400 rounded">Gherkin</span>
+                                <span class="text-xs px-2 py-1 bg-green-500/10 text-green-400 rounded">Requisitos</span>
+                            </div>
+                            <span class="text-accent text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">
+                                Ver documento <i class="fas fa-arrow-right"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Call to Action for more -->
+            <div class="mt-12 text-center">
+                <p class="text-gray-400 text-sm mb-4">
+                    Estes são apenas exemplos representativos. Possuo diversos outros entregáveis sob demanda.
+                </p>
+                <a href="#contato" class="inline-flex items-center gap-2 text-accent hover:text-accent-hover transition-colors">
+                    <span>Solicite mais exemplos</span>
+                    <i class="fas fa-external-link-alt text-xs"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- Differentials -->
-    <section class="py-24 bg-secondary/30">
+    <section class="py-24">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-2 gap-12 items-center">
                 <div>
@@ -702,9 +854,9 @@
     <!-- Footer -->
     <footer class="py-8 border-t border-gray-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div class="flex items-center gap-2">
-                <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center text-white font-bold text-sm">
-                    RL
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full overflow-hidden bg-gradient-to-br from-blue-500 to-purple-600 p-0.5">
+                    <img src="/mnt/kimi/upload/profile.png" alt="Romildo Lima" class="w-full h-full object-cover rounded-full bg-primary">
                 </div>
                 <span class="font-semibold">Romildo Lima</span>
             </div>
@@ -727,7 +879,312 @@
         </div>
     </footer>
 
+    <!-- Modal para Preview de Documentos -->
+    <div id="docModal" class="fixed inset-0 z-[100] hidden modal-backdrop flex items-center justify-center p-4">
+        <div class="glass-effect w-full max-w-4xl max-h-[90vh] overflow-hidden rounded-2xl border border-gray-700/50 shadow-2xl transform transition-all scale-95 opacity-0" id="modalContent">
+            <!-- Header -->
+            <div class="flex items-center justify-between p-6 border-b border-gray-700/50 bg-white/5">
+                <div class="flex items-center gap-3">
+                    <div id="modalIcon" class="w-10 h-10 rounded-lg flex items-center justify-center text-xl"></div>
+                    <div>
+                        <h3 id="modalTitle" class="text-xl font-bold"></h3>
+                        <p id="modalSubtitle" class="text-sm text-gray-400"></p>
+                    </div>
+                </div>
+                <button onclick="closeModal()" class="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <!-- Content -->
+            <div class="overflow-y-auto max-h-[60vh] p-6 space-y-6" id="modalBody">
+                <!-- Conteúdo dinâmico será inserido aqui -->
+            </div>
+
+            <!-- Footer -->
+            <div class="p-6 border-t border-gray-700/50 bg-white/5 flex justify-between items-center">
+                <span class="text-sm text-gray-400">Documento confidencial - Uso apenas para demonstração</span>
+                <button onclick="closeModal()" class="px-6 py-2 bg-accent hover:bg-accent-hover rounded-lg transition-colors">
+                    Fechar
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // Dados dos documentos para o modal
+        const docData = {
+            manual: {
+                title: "Manual do Usuário - Campanha SBD",
+                subtitle: "Documentação técnica completa • 2025",
+                icon: "fa-book-open",
+                iconColor: "text-blue-400 bg-blue-500/20",
+                content: `
+                    <div class="space-y-6">
+                        <div class="doc-preview p-6 rounded-xl">
+                            <h4 class="text-lg font-bold mb-4 text-blue-400">📋 Sumário Executivo</h4>
+                            <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                                Manual completo desenvolvido para aplicativo mobile de campanha médica da Sociedade Brasileira de Dermatologia (SBD). 
+                                Documentação orientada a voluntários médicos com fluxos de atendimento, sincronização de dados offline e resolução de problemas.
+                            </p>
+                            <div class="grid md:grid-cols-2 gap-4 mt-4">
+                                <div class="bg-white/5 p-4 rounded-lg">
+                                    <h5 class="font-semibold text-sm mb-2 text-blue-300">Público-alvo</h5>
+                                    <p class="text-xs text-gray-400">Médicos voluntários participantes da campanha de prevenção ao câncer de pele</p>
+                                </div>
+                                <div class="bg-white/5 p-4 rounded-lg">
+                                    <h5 class="font-semibold text-sm mb-2 text-blue-300">Plataforma</h5>
+                                    <p class="text-xs text-gray-400">iOS e Android (React Native)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="text-lg font-bold mb-3">🎯 Principais Seções</h4>
+                            <div class="space-y-3">
+                                <div class="flex items-start gap-3 p-3 bg-white/5 rounded-lg">
+                                    <span class="text-blue-400 font-bold">01</span>
+                                    <div>
+                                        <h5 class="font-semibold text-sm">Antes de Começar</h5>
+                                        <p class="text-xs text-gray-400">Instruções críticas sobre desinstalação de versões anteriores e instalação correta</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3 p-3 bg-white/5 rounded-lg">
+                                    <span class="text-blue-400 font-bold">02</span>
+                                    <div>
+                                        <h5 class="font-semibold text-sm">Acesso e Cadastro</h5>
+                                        <p class="text-xs text-gray-400">Fluxo de primeiro acesso, vinculação a postos de atendimento e recuperação de senha</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3 p-3 bg-white/5 rounded-lg">
+                                    <span class="text-blue-400 font-bold">03</span>
+                                    <div>
+                                        <h5 class="font-semibold text-sm">Seleção de Postos (NOVIDADE 2025)</h5>
+                                        <p class="text-xs text-gray-400">Nova funcionalidade permitindo atuação em múltiplos postos sem perder dados</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3 p-3 bg-white/5 rounded-lg">
+                                    <span class="text-blue-400 font-bold">04</span>
+                                    <div>
+                                        <h5 class="font-semibold text-sm">Realizando Atendimento</h5>
+                                        <p class="text-xs text-gray-400">Passo a passo do fluxo completo: dados do paciente, diagnóstico dermatológico e conduta</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3 p-3 bg-white/5 rounded-lg">
+                                    <span class="text-blue-400 font-bold">05</span>
+                                    <div>
+                                        <h5 class="font-semibold text-sm">Sincronização e Status</h5>
+                                        <p class="text-xs text-gray-400">Sistema de indicadores visuais (como WhatsApp) para confirmação de envio dos dados</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="doc-preview p-6 rounded-xl">
+                            <h4 class="text-lg font-bold mb-3 text-blue-400">✨ Destaques de UX Writing</h4>
+                            <ul class="space-y-2 text-sm text-gray-300">
+                                <li class="flex items-center gap-2"><i class="fas fa-check text-success text-xs"></i> Linguagem simples e direta para médicos não técnicos</li>
+                                <li class="flex items-center gap-2"><i class="fas fa-check text-success text-xs"></i> Alertas visuais para ações críticas (⚠️ ATENÇÃO)</li>
+                                <li class="flex items-center gap-2"><i class="fas fa-check text-success text-xs"></i> Metáforas familiares ("funciona como o WhatsApp")</li>
+                                <li class="flex items-center gap-2"><i class="fas fa-check text-success text-xs"></i> Ícones intuitivos para status de sincronização</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-yellow-500/10 border border-yellow-500/30 p-4 rounded-lg">
+                            <p class="text-sm text-yellow-200">
+                                <i class="fas fa-lightbulb mr-2"></i>
+                                <strong>Resultado:</strong> Redução de 60% nos tickets de suporte relacionados a dúvidas operacionais após implementação deste manual.
+                            </p>
+                        </div>
+                    </div>
+                `
+            },
+            bdd: {
+                title: "User Stories & BDD - Portal V5",
+                subtitle: "Especificação funcional • Mudança de Categoria",
+                icon: "fa-code",
+                iconColor: "text-green-400 bg-green-500/20",
+                content: `
+                    <div class="space-y-6">
+                        <div class="doc-preview p-6 rounded-xl">
+                            <h4 class="text-lg font-bold mb-4 text-green-400">🎯 Contexto do Projeto</h4>
+                            <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                                Especificação funcional completa para implementação de autoatendimento no Portal V5, 
+                                permitindo que associados iniciem processo de mudança de categoria de forma autônoma, 
+                                eliminando recebimento de documentos via e-mail/telefone.
+                            </p>
+                            <div class="grid md:grid-cols-3 gap-3 mt-4">
+                                <div class="bg-white/5 p-3 rounded-lg text-center">
+                                    <p class="text-2xl font-bold text-green-400">2</p>
+                                    <p class="text-xs text-gray-400">User Stories</p>
+                                </div>
+                                <div class="bg-white/5 p-3 rounded-lg text-center">
+                                    <p class="text-2xl font-bold text-green-400">5+</p>
+                                    <p class="text-xs text-gray-400">Cenários BDD</p>
+                                </div>
+                                <div class="bg-white/5 p-3 rounded-lg text-center">
+                                    <p class="text-2xl font-bold text-green-400">4</p>
+                                    <p class="text-xs text-gray-400">Regras de Negócio</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="text-lg font-bold mb-3">📝 User Stories Principais</h4>
+                            
+                            <div class="space-y-4">
+                                <div class="bg-white/5 p-4 rounded-lg border-l-4 border-green-500">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="text-xs font-mono text-green-400">US-CAT-001</span>
+                                        <span class="text-xs bg-red-500/20 text-red-400 px-2 py-1 rounded">Alta Prioridade</span>
+                                    </div>
+                                    <h5 class="font-bold text-sm mb-2">Solicitação de mudança de categoria (Visão Associado)</h5>
+                                    <p class="text-xs text-gray-400 mb-3">
+                                        Como associado ou congressista acessando o Portal V5, 
+                                        quero poder selecionar uma nova categoria de desejo, justificar o motivo e realizar upload dos documentos comprobatórios.
+                                    </p>
+                                    <div class="flex gap-2">
+                                        <span class="text-xs px-2 py-1 bg-green-500/10 text-green-400 rounded">Wizard 3 passos</span>
+                                        <span class="text-xs px-2 py-1 bg-green-500/10 text-green-400 rounded">Upload obrigatório</span>
+                                    </div>
+                                </div>
+
+                                <div class="bg-white/5 p-4 rounded-lg border-l-4 border-blue-500">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="text-xs font-mono text-blue-400">US-002</span>
+                                        <span class="text-xs bg-gray-700 text-gray-400 px-2 py-1 rounded">Média Prioridade</span>
+                                    </div>
+                                    <h5 class="font-bold text-sm mb-2">Análise e aprovação da mudança (Visão Admin)</h5>
+                                    <p class="text-xs text-gray-400 mb-3">
+                                        Como administrador responsável pela validação de cadastros no sistema legado, 
+                                        quero identificar visualmente na grade de histórico quais registros são "solicitações pendentes" vindas da web.
+                                    </p>
+                                    <div class="flex gap-2">
+                                        <span class="text-xs px-2 py-1 bg-blue-500/10 text-blue-400 rounded">Grid Admin</span>
+                                        <span class="text-xs px-2 py-1 bg-blue-500/10 text-blue-400 rounded">Destaque visual</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="text-lg font-bold mb-3">✅ Critérios de Aceitação (BDD/Gherkin)</h4>
+                            
+                            <div class="space-y-3">
+                                <div class="bg-gray-900/50 p-4 rounded-lg font-mono text-xs">
+                                    <p class="text-green-400 mb-2">Cenário 1: Acesso e Visualização</p>
+                                    <p class="text-gray-300">
+                                        <span class="text-purple-400">Dado</span> que estou logado no Portal V5<br>
+                                        <span class="text-purple-400">Quando</span> acesso "Meus Dados"<br>
+                                        <span class="text-purple-400">Então</span> devo ver o botão "Solicitar Alteração"
+                                    </p>
+                                </div>
+
+                                <div class="bg-gray-900/50 p-4 rounded-lg font-mono text-xs">
+                                    <p class="text-green-400 mb-2">Cenário 3: Validação de Documento</p>
+                                    <p class="text-gray-300">
+                                        <span class="text-purple-400">Dado</span> que selecionei categoria que exige documento<br>
+                                        <span class="text-purple-400">Quando</span> tento enviar sem anexo<br>
+                                        <span class="text-purple-400">Então</span> o sistema deve bloquear a ação e exibir erro
+                                    </p>
+                                </div>
+
+                                <div class="bg-gray-900/50 p-4 rounded-lg font-mono text-xs">
+                                    <p class="text-green-400 mb-2">Cenário 5: Bloqueio por Duplicidade</p>
+                                    <p class="text-gray-300">
+                                        <span class="text-purple-400">Dado</span> que já existe solicitação pendente<br>
+                                        <span class="text-purple-400">Quando</span> tento criar nova solicitação<br>
+                                        <span class="text-purple-400">Então</span> exibir alerta "Em Análise" e bloquear envio
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="doc-preview p-6 rounded-xl">
+                            <h4 class="text-lg font-bold mb-3 text-green-400">🔗 Integrações Técnicas</h4>
+                            <div class="space-y-2 text-sm text-gray-300">
+                                <div class="flex justify-between items-center py-2 border-b border-gray-700">
+                                    <span>API Backend</span>
+                                    <span class="font-mono text-xs text-green-400">POST /api/v5/members/category-change-request</span>
+                                </div>
+                                <div class="flex justify-between items-center py-2 border-b border-gray-700">
+                                    <span>Destino dos dados</span>
+                                    <span class="text-xs">Tabelas Historico e Avaliacao (Legado)</span>
+                                </div>
+                                <div class="flex justify-between items-center py-2 border-b border-gray-700">
+                                    <span>Replicação</span>
+                                    <span class="text-xs">Procedures/Triggers do banco (Centros de Custo)</span>
+                                </div>
+                                <div class="flex justify-between items-center py-2">
+                                    <span>Validação</span>
+                                    <span class="text-xs">Flag exige_comprovacao da categoria destino</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-green-500/10 border border-green-500/30 p-4 rounded-lg">
+                            <p class="text-sm text-green-200">
+                                <i class="fas fa-check-circle mr-2"></i>
+                                <strong>Resultado:</strong> Documento aprovado pelo time de desenvolvimento e Product Owner, 
+                                servindo como base para implementação em 2 sprints.
+                            </p>
+                        </div>
+                    </div>
+                `
+            }
+        };
+
+        // Funções do Modal
+        function openModal(docType) {
+            const modal = document.getElementById('docModal');
+            const content = document.getElementById('modalContent');
+            const data = docData[docType];
+            
+            if (!data) return;
+            
+            // Preencher dados
+            document.getElementById('modalTitle').textContent = data.title;
+            document.getElementById('modalSubtitle').textContent = data.subtitle;
+            document.getElementById('modalBody').innerHTML = data.content;
+            
+            // Ícone
+            const iconDiv = document.getElementById('modalIcon');
+            iconDiv.className = `w-10 h-10 rounded-lg flex items-center justify-center text-xl ${data.iconColor}`;
+            iconDiv.innerHTML = `<i class="fas ${data.icon}"></i>`;
+            
+            // Mostrar modal
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                content.classList.remove('scale-95', 'opacity-0');
+                content.classList.add('scale-100', 'opacity-100');
+            }, 10);
+            
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('docModal');
+            const content = document.getElementById('modalContent');
+            
+            content.classList.remove('scale-100', 'opacity-100');
+            content.classList.add('scale-95', 'opacity-0');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        // Fechar modal ao clicar fora
+        document.getElementById('docModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        // Fechar com ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
+
         // Mobile Menu Toggle
         function toggleMenu() {
             const menu = document.getElementById('mobile-menu');
@@ -744,7 +1201,6 @@
                         behavior: 'smooth',
                         block: 'start'
                     });
-                    // Close mobile menu if open
                     document.getElementById('mobile-menu').classList.add('hidden');
                 }
             });
@@ -782,6 +1238,24 @@
             el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
             observer.observe(el);
         });
+
+        // GSAP Animations (se disponível)
+        if (typeof gsap !== 'undefined') {
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // Animação para cards de portfolio
+            gsap.from('.portfolio-item', {
+                scrollTrigger: {
+                    trigger: '#portfolio',
+                    start: 'top 80%',
+                },
+                y: 50,
+                opacity: 0,
+                duration: 0.8,
+                stagger: 0.2,
+                ease: 'power3.out'
+            });
+        }
     </script>
 </body>
 </html>
